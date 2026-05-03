@@ -43,7 +43,13 @@ export const translations = {
     product7: "DocuMath AI: Make your Documents Like Magic",
     product8: "Tatweer Tools: Make Engineering Like Magic",
     product9: "AI Architecture Tools: Make Your Architecture Speak",
-    linkedin: "LinkedIn"
+    linkedin: "LinkedIn",
+    youtube: "Watch Tutorial",
+    aiSettings: "AI Settings",
+    customApiKey: "Custom API Key (Gemini)",
+    apiKeyDesc: "Add your own Google Gemini API key to bypass built-in capacity limits.",
+    save: "Save",
+    close: "Close"
   },
   ar: {
     heroTitle: "حول الاسكتشات إلى",
@@ -87,7 +93,13 @@ export const translations = {
     product7: "DocuMath AI: اجعل مستنداتك كالسحر",
     product8: "Tatweer Tools: اجعل الهندسة كالسحر",
     product9: "AI Architecture Tools: اجعل عمارتك تتحدث",
-    linkedin: "لينكد إن"
+    linkedin: "لينكد إن",
+    youtube: "شرح البرنامج",
+    aiSettings: "إعدادات الذكاء الاصطناعي",
+    customApiKey: "مفتاح API الخاص بك (Gemini)",
+    apiKeyDesc: "أضف مفتاح Google Gemini API الخاص بك لتجاوز حدود الاستخدام الافتراضية.",
+    save: "حفظ",
+    close: "إغلاق"
   }
 };
 

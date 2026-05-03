@@ -70,7 +70,9 @@ const responseSchema: Schema = {
 };
 
 export const analyzeImage = async (base64Image: string, mimeType: string, lang: Language): Promise<AnalysisResult> => {
-  const apiKey = process.env.API_KEY;
+  const customKey = localStorage.getItem('customGeminiKey');
+  const apiKey = customKey || process.env.API_KEY || process.env.GEMINI_API_KEY;
+  
   if (!apiKey) {
     throw new Error("API Key is missing via process.env.API_KEY");
   }
