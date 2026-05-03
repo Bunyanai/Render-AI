@@ -5,8 +5,11 @@ import UploadZone from './components/UploadZone';
 import ResultsView from './components/ResultsView';
 import { AnalysisResult, ProcessingState, Language } from './types';
 import { analyzeImage } from './services/geminiService';
-import { Wand2, RefreshCcw, Loader2, AlertTriangle } from 'lucide-react';
+import { Wand2, RefreshCcw, Loader2, AlertTriangle, ShieldAlert, LogIn } from 'lucide-react';
 import { getTranslation } from './utils/i18n';
+import { useAuth } from './context/AuthContext';
+import { signInWithGoogle } from './lib/firebase';
+import { motion } from 'motion/react';
 
 const App: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -24,6 +27,9 @@ const App: React.FC = () => {
   }, [lang]);
 
   const t = getTranslation(lang);
+  const { user, isApproved, loading: authLoading } = useAuth();
+
+  if (authLoading) return null;
 
   const handleFileSelect = (selectedFile: File) => {
     setFile(selectedFile);
@@ -76,8 +82,38 @@ const App: React.FC = () => {
       <Header lang={lang} setLang={setLang} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        
-        {/* Intro Section */}
+        {!user ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
+            <div className="p-6 bg-arch-accent/10 rounded-2xl border border-arch-accent/20">
+              <LogIn className="w-16 h-16 text-arch-accent" />
+            </div>
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold text-white">{t.login}</h2>
+              <p className="text-gray-400 max-w-sm mx-auto">
+                {lang === 'en' 
+                  ? "Please sign in with your Google account to start using RENDER AI." 
+                  : "يرجى تسجيل الدخول بحساب جوجل للبدء في استخدام RENDER AI."}
+              </p>
+            </div>
+            <button 
+              onClick={() => signInWithGoogle()}
+              className="flex items-center gap-3 px-8 py-4 bg-arch-accent hover:bg-arch-accent/90 text-white rounded-xl font-bold shadow-xl shadow-arch-accent/20 transition-all active:scale-95"
+            >
+              <LogIn className="w-5 h-5" />
+              {t.login}
+            </button>
+          </div>
+        ) : !isApproved ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+            <div className="p-4 bg-red-500/10 rounded-full border border-red-500/20">
+              <ShieldAlert className="w-12 h-12 text-red-500" />
+            </div>
+            <h2 className="text-2xl font-bold text-white">{t.accessDenied}</h2>
+            <p className="text-gray-400 max-w-md mx-auto">{t.pendingApproval}</p>
+          </div>
+        ) : (
+          <>
+            {/* Intro Section */}
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t.heroTitle} <span className="text-transparent bg-clip-text bg-gradient-to-r from-arch-accent to-blue-500">{t.heroTitleHighlight}</span>
@@ -149,7 +185,8 @@ const App: React.FC = () => {
              <ResultsView result={result} lang={lang} />
           </div>
         )}
-
+          </>
+        )}
       </main>
       
       <Footer lang={lang} />

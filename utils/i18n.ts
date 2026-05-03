@@ -49,7 +49,12 @@ export const translations = {
     customApiKey: "Custom API Key (Gemini)",
     apiKeyDesc: "Add your own Google Gemini API key to bypass built-in capacity limits.",
     save: "Save",
-    close: "Close"
+    close: "Close",
+    login: "Login with Google",
+    logout: "Logout",
+    admin: "Admin",
+    accessDenied: "Access Denied",
+    pendingApproval: "Your account is pending approval. Please contact the administrator.",
   },
   ar: {
     heroTitle: "حول الاسكتشات إلى",
@@ -99,7 +104,12 @@ export const translations = {
     customApiKey: "مفتاح API الخاص بك (Gemini)",
     apiKeyDesc: "أضف مفتاح Google Gemini API الخاص بك لتجاوز حدود الاستخدام الافتراضية.",
     save: "حفظ",
-    close: "إغلاق"
+    close: "إغلاق",
+    login: "تسجيل الدخول بجوجل",
+    logout: "تسجيل الخروج",
+    admin: "مسؤول",
+    accessDenied: "تم رفض الوصول",
+    pendingApproval: "حسابك قيد انتظار الموافقة. يرجى الاتصال بالمسؤول.",
   }
 };
 
